@@ -1,0 +1,28 @@
+<!doctype html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Results</title>
+</head>
+<body>
+
+<div class="correct" th:if="${userGuess} == ${randomNumber}">
+    <h1>Congratulations! You guessed <span th:text="${userGuess}"></span> and the answer was <span th:text="${randomNumber}"></span>!</h1>
+</div>
+
+<div class="incorrect" th:if="${userGuess} != ${randomNumber}">
+    <h1>Incorrect, please try again. You guessed <span th:text="${userGuess}"></span> and the correct answer was <span th:text="${randomNumber}"></span></h1>
+</div>
+
+<form action="/roll-dice" method="get">
+    <input type="hidden">
+    <button type="submit">Guess Again!</button>
+</form>
+
+</body>
+</html>
