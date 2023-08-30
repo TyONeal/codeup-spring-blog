@@ -11,12 +11,12 @@
 </head>
 <body>
 
-<div class="correct" th:if="${userGuess} == ${randomNumber}">
-    <h1>Congratulations! You guessed <span th:text="${userGuess}"></span> and the answer was <span th:text="${randomNumber}"></span>!</h1>
+<div class="correct" th:if="${userGuess} == ${diceTotal}">
+    <h1>Congratulations! You guessed <span th:text="${userGuess}"></span> and the answer was <span th:text="${diceTotal}"></span>!</h1>
 </div>
 
-<div class="incorrect" th:if="${userGuess} != ${randomNumber}">
-    <h1>Incorrect, please try again. You guessed <span th:text="${userGuess}"></span> and the correct answer was <span th:text="${randomNumber}"></span></h1>
+<div class="incorrect" th:if="${userGuess} != ${diceTotal}">
+    <h1>Incorrect, please try again. You guessed <span th:text="${userGuess}"></span> and the correct answer was <span th:text="${diceTotal}"></span></h1>
 </div>
 
 <form action="/roll-dice" method="get">
