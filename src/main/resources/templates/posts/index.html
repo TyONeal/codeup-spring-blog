@@ -1,5 +1,5 @@
 <!doctype html>
-<html 
+<html
         xmlns:th="http://www.thymeleaf.org"
         lang="en">
 <head>
@@ -7,21 +7,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dice Roll</title>
+    <title>View All</title>
 </head>
 <body>
 
-<div th:replace="partials/navbar :: navbar">
+<h1>Posts:</h1>
 
+<div th:each="post : ${post}">
+    <p th:text="${post.title}"/>
+    <p th:text="${post.body}"/>
 </div>
-
-<h1>Pick a Number between 1 and 24!</h1>
-<form action="/roll-dice/guess" method="post">
-    <input type="text" name="userGuess">
-    <button type="submit">Guess!</button>
-</form>
-
-
-
 </body>
 </html>
