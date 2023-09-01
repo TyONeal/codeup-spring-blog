@@ -1,6 +1,8 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.entities.Post;
+import com.codeup.codeupspringblog.entities.PostRepository;
+import jakarta.security.auth.message.callback.PrivateKeyCallback;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,22 +12,16 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
     public String posts(Model model) {
-        ArrayList<Post> postList = new ArrayList<>();
 
-        Post post1 = new Post();
-        post1.setTitle("test title 1");
-        post1.setBody("test body 1");
-
-        Post post2 = new Post();
-        post2.setTitle("test title 2");
-        post2.setBody("test body 2");
-
-        postList.add(post1);
-        postList.add(post2);
-
-        model.addAttribute("post", postList);
+        model.addAttribute("post", postDao.findAll());
         return "posts/index";
     }
 
@@ -40,15 +36,17 @@ public class PostController {
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-    @ResponseBody
     public String viewCreatePost() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(@RequestParam(name = "post-title") String postTitle, @RequestParam(name = "post-body") String postBody, Model model) {
+        Post createdPost = new Post();
+        createdPost.setTitle(postTitle);
+        createdPost.setBody(postBody);
+        model.addAttribute("post", createdPost);
+        postDao.save(createdPost);
+        return "redirect:/posts";
     }
-
 }

@@ -1,0 +1,24 @@
+<!doctype html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Post</title>
+</head>
+<body>
+<h1>Let's create a blog post:</h1>
+
+<form action="posts/create" method="post">
+  <label for="post-title">Title</label>
+  <input type="text" name="post-title" id="post-title" placeholder="Title of your Post">
+  <label for="post-body">Body</label>
+  <input type="text" name="post-body" id="post-body" placeholder="Body of your Post">
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
