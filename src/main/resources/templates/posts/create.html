@@ -12,11 +12,13 @@
 <body>
 <h1>Let's create a blog post:</h1>
 
-<form action="/posts/create" method="POST">
-  <label for="post-title">Title</label>
-  <input type="text" name="post-title" id="post-title" placeholder="Title of your Post">
-  <label for="post-body">Body</label>
-  <input type="text" name="post-body" id="post-body" placeholder="Body of your Post">
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+  Title
+  <input th:field="*{title}"/>
+    <br>
+  Body
+  <input th:field="*{body}"/>
+    <br>
   <button type="submit">Submit</button>
 </form>
 

@@ -39,21 +39,26 @@ public class PostController {
     }
 
     @RequestMapping(path = "posts/create", method = RequestMethod.GET)
-    public String viewCreatePost() {
-        System.out.println("viewing form");
+    public String viewCreatePost(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @RequestMapping(path = "posts/create", method = RequestMethod.POST)
-    public String createPost(@RequestParam(name = "post-title") String postTitle, @RequestParam(name = "post-body") String postBody, Model model) {
-        System.out.println("received post request");
-        Post createdPost = new Post();
-        createdPost.setTitle(postTitle);
-        createdPost.setBody(postBody);
+    public String createPost(@ModelAttribute Post post) {
+        postDao.save(post);
+        return "redirect:/posts";
+    }
 
-        createdPost.setUser(userDao.getUserById(1));
-        model.addAttribute("post", createdPost);
-        postDao.save(createdPost);
+    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
+    public String viewEditPost(@PathVariable long id, Model model) {
+        model.addAttribute("post", postDao.searchPostsById(id));
+        return "posts/create";
+    }
+
+    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.POST)
+        public String editPost(@ModelAttribute Post post) {
+        postDao.save(post);
         return "redirect:/posts";
     }
 }
