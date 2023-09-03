@@ -5,6 +5,8 @@ import com.codeup.codeupspringblog.entities.Post;
 import com.codeup.codeupspringblog.entities.PostRepository;
 import com.codeup.codeupspringblog.entities.User;
 import com.codeup.codeupspringblog.entities.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,16 @@ public class PostController {
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
     public String posts(Model model) {
-
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(authenticatedUser != null) {
         model.addAttribute("post", postDao.findAll());
+        model.addAttribute("user", authenticatedUser);
         return "posts/index";
+
+        } else {
+            return "redirect:/login";
+        }
+
     }
 
     @RequestMapping(path = "/singlepost", method = RequestMethod.GET)
@@ -49,9 +58,8 @@ public class PostController {
 
     @RequestMapping(path = "posts/create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute Post post) {
-
-        User user = userDao.getUserById(1);
-        post.setUser(user);
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(authenticatedUser);
         postDao.save(post);
         emailService.prepareAndSend(post, "send this email", "email body");
         return "redirect:/posts";
@@ -59,12 +67,19 @@ public class PostController {
 
     @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
     public String viewEditPost(@PathVariable long id, Model model) {
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (authenticatedUser != null) {
         model.addAttribute("post", postDao.searchPostsById(id));
         return "posts/create";
+
+        }else {
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.POST)
         public String editPost(@ModelAttribute Post post) {
+
         postDao.save(post);
         return "redirect:/posts";
     }

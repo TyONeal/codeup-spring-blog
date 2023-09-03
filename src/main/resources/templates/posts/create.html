@@ -1,6 +1,7 @@
 <!doctype html>
 <html
         xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,17 +11,19 @@
     <title>Create Post</title>
 </head>
 <body>
-<h1>Let's create a blog post:</h1>
+<div sec:authorize="isAuthenticated()">
+    <div th:replace="partials/navbar :: navbar"></div>
+    <h1>Let's create a blog post:</h1>
 
-<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-  Title
-  <input th:field="*{title}"/>
-    <br>
-  Body
-  <input th:field="*{body}"/>
-    <br>
-  <button type="submit">Submit</button>
-</form>
-
+        <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+          Title
+          <input th:field="*{title}"/>
+            <br>
+          Body
+          <input th:field="*{body}"/>
+            <br>
+          <button type="submit">Submit</button>
+        </form>
+</div>
 </body>
 </html>
