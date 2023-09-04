@@ -39,10 +39,10 @@ public class PostController {
 
     }
 
-    @RequestMapping(path = "/singlepost", method = RequestMethod.GET)
-    public String postsById(Model model) {
+    @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
+    public String postsById(@PathVariable long id, Model model) {
 
-        Post post = postDao.searchPostsById(11);
+        Post post = postDao.searchPostsById(id);
         String email = post.getUser().getEmail();
 
         model.addAttribute("post", post);
@@ -50,13 +50,13 @@ public class PostController {
         return "posts/show";
     }
 
-    @RequestMapping(path = "posts/create", method = RequestMethod.GET)
+    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
     public String viewCreatePost(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
 
-    @RequestMapping(path = "posts/create", method = RequestMethod.POST)
+    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute Post post) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(authenticatedUser);
@@ -65,22 +65,37 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.GET)
-    public String viewEditPost(@PathVariable long id, Model model) {
+    @RequestMapping(path = "/posts/edit", method = RequestMethod.GET)
+    public String viewEditPost(Model model) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (authenticatedUser != null) {
-        model.addAttribute("post", postDao.searchPostsById(id));
-        return "posts/create";
-
-        }else {
+            Post emptyPost = new Post();
+            model.addAttribute("post", emptyPost);
+            return "posts/edit";
+        } else {
             return "redirect:/login";
         }
     }
 
-    @RequestMapping(path = "posts/{id}/edit", method = RequestMethod.POST)
-        public String editPost(@ModelAttribute Post post) {
 
-        postDao.save(post);
-        return "redirect:/posts";
+    @RequestMapping(path = "/posts/edit", method = RequestMethod.POST)
+    public String handleEditForm(@RequestParam(name = "id") Long postId, Model model) {
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (authenticatedUser != null) {
+            // Retrieve the post using the postId parameter
+            Post postToEdit = postDao.searchPostsById(postId);
+
+            if (postToEdit != null) {
+                model.addAttribute("post", postToEdit);
+                return "posts/edit";
+            } else {
+                // Handle the case where the post with the specified ID was not found
+                // You can redirect to an error page or show a message to the user
+                return "redirect:/error";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
+
 }
