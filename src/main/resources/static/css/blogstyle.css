@@ -1,0 +1,59 @@
+body {
+    background-color: palegoldenrod;
+}
+
+.navbar {
+    min-width: 100%;
+    float: left;
+    margin: 0 0 1em 0;
+    padding: 0;
+    background-color: black;
+    border-bottom: 1px solid whitesmoke;
+
+}
+
+.landing-flex{
+    display: flex;
+    color: blue;
+
+}
+
+.landing-center {
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: green;
+}
+
+.log {
+    float: right;
+}
+
+.home {
+    background-color: purple;
+}
+
+.logo-img {
+    width: 400px;
+}

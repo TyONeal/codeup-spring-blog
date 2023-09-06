@@ -1,6 +1,7 @@
 package com.codeup.codeupspringblog.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="posts")
@@ -8,8 +9,12 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotBlank(message = "Your post must have a title.")
+    @Size(min=3, max=100, message = "A title must be between 3 and 100 characters.")
     @Column(nullable = false, length = 100)
     private String title;
+    @NotBlank(message = "Your post must have a body.")
+    @Size(min=1, max=5000)
     @Column(nullable = false)
     private String body;
 

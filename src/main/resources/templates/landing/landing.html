@@ -1,0 +1,19 @@
+<!doctype html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<head th:insert="~{partials/header :: header}" th:remove="tags">
+   <title>Landing</title>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="container grow">
+        <div th:insert="~{partials/navbar :: navbar}" class="full-width row"></div>
+        <div class="row">
+            <div th:insert="~{partials/hero :: hero}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

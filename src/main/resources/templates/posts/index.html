@@ -3,19 +3,16 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<head th:insert="partials/header ::header" th:remove="tags">
+
     <title>View All</title>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
 <nav th:replace="partials/navbar :: navbar"></nav>
 
-
-        <h1>Posts:</h1>
+<div>
+        <h1 sec:authorize="isAuthenticated()">Welcome, <span th:text="${user.getUsername()}"></span></h1>
+        <h1 sec:authorize="!isAuthenticated()">Posts:</h1>
 
             <div th:each="post : ${post}">
                 <p th:text="${post.title}"/>

@@ -36,13 +36,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/posts/create", "/posts/edit", "/logout", "/posts", "/posts/*", "/").authenticated()
-                .requestMatchers("/sign-up", "/login").permitAll()
+                .requestMatchers("/sign-up", "/login", "/posts", "/", "").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/posts/create", "/posts/edit", "/logout").authenticated()
         )
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
-                .logout((logout) -> logout.logoutSuccessUrl("/"))
-                .httpBasic(withDefaults());
+                .formLogin((login) -> login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/posts")
+                )
+                .logout((logout) -> logout
+                        .logoutSuccessUrl("/")
+                )
+//                .httpBasic(withDefaults())
+        ;
         return http.build();
     }
 }
