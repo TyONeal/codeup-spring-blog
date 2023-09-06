@@ -2,27 +2,24 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<head th:insert="~{partials/header :: header}">
     <title>Sign-Up</title>
 </head>
 <body>
+<div class="page-wrapper">
+    <div th:insert="~{partials/navbar :: navbar}"></div>
+    <div class="container grow d-flex">
         <h1>Create an Account</h1>
-        <form th:action="@{sign-up}" method="post" th:object="${user}">
-
-            <label for="username">Username</label>
-            <input id="username" th:field="*{username}"/>
-
-            <label for="email">Email</label>
-            <input id="email" th:field="*{email}"/>
-
-            <label for="password">Password</label>
+        <form th:action="@{sign-up}" method="post" th:object="${user}" class="signup-form">
+            <label for="username" class="signup-username">Username</label>
+            <input id="username" type="text" th:field="*{username}"/>
+            <label for="email" class="signup-email">Email</label>
+            <input id="email" type="text" th:field="*{email}"/>
+            <label for="password" class="signup-password">Password</label>
             <input id="password" type="password" th:field="*{password}"/>
-
-            <input value="Sign Me Up!" type="submit"/>
+            <input value="Sign Me Up!" type="submit" class="signup-btn"/>
         </form>
+    </div>
+</div>
 </body>
 </html>

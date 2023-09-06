@@ -1,25 +1,13 @@
 body {
-    background-color: palegoldenrod;
+    background: linear-gradient(pink, mediumpurple);
 }
+
+/*navbar*/
 
 .navbar {
-    min-width: 100%;
-    float: left;
-    margin: 0 0 1em 0;
-    padding: 0;
     background-color: black;
     border-bottom: 1px solid whitesmoke;
-
-}
-
-.landing-flex{
-    display: flex;
-    color: blue;
-
-}
-
-.landing-center {
-    justify-content: center;
+    width: 100%;
 }
 
 ul {
@@ -43,17 +31,146 @@ li a {
 }
 
 li a:hover {
-    background-color: green;
+    background-color: mediumpurple;
+    border: solid 2px black;
+    border-radius: 3px;
 }
 
-.log {
+li#logout-button {
     float: right;
+    margin-left: unset;
+}
+
+li#login-button {
+    float: right;
+    margin-left: unset;
 }
 
 .home {
-    background-color: purple;
+    background-color: mediumpurple;
+}
+
+/*end of navbar*/
+
+/*Landing*/
+
+.landing-flex{
+    color: blue;
+
+}
+
+.landing-center {
+}
+
+.landing-column {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-container {
+    display: flex;
 }
 
 .logo-img {
     width: 400px;
 }
+
+/*end of landing*/
+
+/*login form*/
+/*shares input styling with signup*/
+
+.login-form {
+    border: 3px solid black;
+    padding: 10px;
+    width: 400px;
+}
+
+.login-username, .login-password, .login-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-shadow: mediumpurple;
+}
+
+.login-username {
+    font-family: Georgia;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+.login-password {
+    font-family: Georgia;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+.login-btn {
+    margin-left: 140px;
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    height: 40px;
+    width: 100px;
+    box-shadow: mediumpurple;
+}
+
+/*end of login form*/
+
+/*signup form*/
+/*shares input styling with login*/
+
+.signup-form {
+    border: 3px solid black;
+    padding: 10px;
+    width: 400px;
+}
+
+.signup-username, .signup-email, .signup-password, .signup-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+}
+
+.signup-username {
+    font-family: Georgia;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+.signup-email {
+    font-family: Georgia;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+.signup-password {
+    font-family: Georgia;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+.signup-btn {
+    margin-left: 140px;
+    text-align: center;
+    background-color: black;
+    color: whitesmoke;
+    height: 40px;
+    width: 100px;
+    box-shadow: mediumpurple;
+}
+

@@ -1,6 +1,6 @@
 
 <div th:fragment="navbar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <nav class="navbar full-width grow">
+    <nav class="navbar justify-space-evenly">
         <ul>
             <li class="home">
                 <a href="/">Home</a>
@@ -17,12 +17,12 @@
             <li>
                 <a href="/posts/edit">Edit</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="log">
+            <li sec:authorize="isAuthenticated()" id="logout-button">
                 <form th:action="@{/logout}" th:method="post">
                     <button type="submit">Logout</button>
                 </form>
             </li>
-            <li sec:authorize="!isAuthenticated()" class="log">
+            <li sec:authorize="!isAuthenticated()" id="login-button">
                 <a href="/login">Login</a>
             </li>
         </ul>

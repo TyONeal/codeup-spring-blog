@@ -7,7 +7,6 @@ import com.codeup.codeupspringblog.entities.PostRepository;
 import com.codeup.codeupspringblog.entities.User;
 import com.codeup.codeupspringblog.entities.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class PostController {
 
         model.addAttribute("post", post);
         model.addAttribute("email", email);
-        return "posts/show";
+        return "view-post";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)

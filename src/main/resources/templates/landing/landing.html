@@ -8,10 +8,17 @@
 </head>
 <body>
 <div class="page-wrapper">
+    <div th:insert="~{partials/navbar :: navbar}"></div>
     <div class="container grow">
-        <div th:insert="~{partials/navbar :: navbar}" class="full-width row"></div>
-        <div class="row">
-            <div th:insert="~{partials/hero :: hero}"></div>
+        <div class="row full-width d-flex">
+            <div class="column d-flex flex-column landing-column">
+                <h1 class="landing-center">Welcome to My Website/Blog</h1>
+                <img class="logo-img" src="/img/tybloglogo.png">
+            </div>
+            <div class="column d-flex flex-column landing-column">
+                <p>This website was designed with Spring Framework, using Java on my backend and Javascript on my Frontend. I'm running a SQL database for data. This site was NOT designed to be deployed, but rather to use as practice in my continuing career.</p>
+                <p>Please read through the README for more information on specifics as well as my app.properties. Thank you!</p>
+            </div>
         </div>
     </div>
 </div>
