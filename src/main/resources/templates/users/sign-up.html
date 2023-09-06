@@ -10,7 +10,7 @@
     <div th:insert="~{partials/navbar :: navbar}"></div>
     <div class="container grow d-flex">
         <h1>Create an Account</h1>
-        <form th:action="@{sign-up}" method="post" th:object="${user}" class="signup-form">
+        <form th:action="@{/sign-up}" method="post" th:object="${user}" class="signup-form">
             <label for="username" class="signup-username">Username</label>
             <input id="username" type="text" th:field="*{username}"/>
             <label for="email" class="signup-email">Email</label>

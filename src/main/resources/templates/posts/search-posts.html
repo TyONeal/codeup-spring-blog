@@ -8,13 +8,9 @@
 <body>
 <div class="page-wrapper">
     <div th:replace="partials/navbar :: navbar"></div>
-    <div class="container">
-        <h1>Post:</h1>
-        <div>
-            <p th:text="${post.title}"/>
-            <p th:text="${post.body}"/>
-            <p th:text="${email}"/>
-        </div>
+    <div class="container" th:each="posts">
+        <h1 th:text="${posts.title}" />
+        <p th: text="${posts.body}"></p>
     </div>
 </div>
 </body>

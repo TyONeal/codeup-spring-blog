@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class PostController {
 
@@ -33,14 +38,11 @@ public class PostController {
         return "posts/index";
     }
 
-    @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
-    public String postsById(@PathVariable long id, Model model) {
-
-        Post post = postDao.searchPostsById(id);
-        String email = post.getUser().getEmail();
-
-        model.addAttribute("post", post);
-        model.addAttribute("email", email);
+    @RequestMapping(path = "/posts/search", method = RequestMethod.GET)
+    public String searchPosts(@RequestParam String search, Model model) {
+        List<Post> searchedPosts;
+        searchedPosts = postDao.findByTitleLike(search);
+        model.addAttribute("posts", searchedPosts);
         return "view-post";
     }
 

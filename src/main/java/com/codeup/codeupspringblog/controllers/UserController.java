@@ -2,6 +2,7 @@ package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.entities.User;
 import com.codeup.codeupspringblog.entities.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class UserController {
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
+
         model.addAttribute("user", new User());
         return "users/sign-up";
     }

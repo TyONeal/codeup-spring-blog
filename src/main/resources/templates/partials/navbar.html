@@ -17,6 +17,9 @@
             <li>
                 <a href="/posts/edit">Edit</a>
             </li>
+            <li class="search">
+                <input name="search" formmethod="post" type="text" placeholder="Search">
+            </li>
             <li sec:authorize="isAuthenticated()" id="logout-button">
                 <form th:action="@{/logout}" th:method="post">
                     <button type="submit">Logout</button>
